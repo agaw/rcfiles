@@ -10,7 +10,7 @@ Change into the cloned repositry and run setup.sh:
 This will link all the configuration files into your home directory. It is therefore required
 to keep the cloned repositry.
 
-You're done now. You probably want to move your ssh keys (backed up to ~/backup) back into ~/.ssh
+You're done now. You probably want to restore your ssh keys (backed up to ~/backup) back into ~/.ssh
 
 Create files in ~/.bash called environment_local, interactive_local, etc to
 do this.
