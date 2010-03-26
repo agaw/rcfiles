@@ -1,0 +1,82 @@
+#! bash
+
+# This file is responsible for setting up the pretty colours in GNU 'ls' and
+# the bash prompt. Depending on whether you use a light on dark, or dark on
+# light terminal you want different colour schemes. Rxvt and some other
+# set the COLORFGBG environment variable to make autodetecting this easy.
+
+# These scripts attempt to detect the terminal colours, and then set COLORFGBG
+# if it isn't already set so that programs like vim can set the correct colours.
+
+# If your terminal isn't detected correctly then you can run lightterm or
+# darkterm to get the colours right. The default can be adjusted below.
+
+# Set to 0 for light background terminal colours by default
+# Set to 1 for dark background terminal colours by default
+DEFAULTDARK=1
+
+
+# Terminals that we want coloured prompts in
+[ -n "${COLORTERM}"          ] && PS1_COLOR=1
+[ "${TERM}" = "linux"        ] && DARK="${DARK:-1}"
+[ "${TERM}" = "screen.linux" ] && DARK="${DARK:-1}"
+[ "${TERM}" = "putty"        ] && DARK="${DARK:-1}"
+[ "${TERM}" = "cygwin"       ] && DARK="${DARK:-1}"
+[ "$(tput colors)" -gt 2     ] && PS1_COLOR=1
+
+# Override COLORFGBG (probably used the darkterm or lightterm function
+if [ -n "${DARK}" ]; then
+	unset COLORFGBG
+else
+	DARK="${DEFAULTDARK}"
+fi
+unset DEFAULTDARK
+
+# If COLORFGBG is set, use it to determine the terminal type, DARK=0 is
+# dark on light, DARK=1 is light on dark.
+if [ -n "${COLORFGBG}" ]; then
+	BG="$(echo "$COLORFGBG" | sed 's/.*;//')"
+	if ! [ "${BG}" -ge 0 ]; then
+		if [ "${BG}" = "white" ]; then
+			DARK=0
+		else
+			DARK=1
+		fi
+	elif [ "${BG}" -ge 0 -a "${BG}" -le 6   -o "${BG}" -eq 8 ]; then
+		DARK=1
+	else
+		DARK=0
+	fi
+	unset BG
+else
+	# Otherwise we just do our best based on the setting of DARK
+	if [ ${DARK} -eq 0 ]; then
+		export COLORFGBG="0;15"
+	else
+		export COLORFGBG="15;0"
+	fi
+fi
+
+# Set the prompt colour, and the colors for the 'ls' command appropriately,
+# depending on the background of the terminal.
+if [ ${PS1_COLOR:-0} -eq 1 ]; then
+	eval $(TERM=xterm dircolors 2> /dev/null)
+	PS1='${debian_chroot:+($debian_chroot)}\[\033[00;31m\]\u@\h\[\033[00m\]:\[\033[00;34m\]\w\[\033[00m\]\n\$ '
+
+	if [ ${DARK} -eq 0 ]; then
+		LS_COLORS="$(echo "${LS_COLORS}" | sed 's/01;/00;/g')"
+		LSCOLORS="exfxcxdxbxegedabagacad" # BSD ls
+	else
+		# We need to bold the LS_COLORS and PS1 environment variables
+		# so they show up on a dark terminal
+		LS_COLORS="$(echo "${LS_COLORS}" | sed 's/00;/01;/g')"
+		LSCOLORS="ExFxCxDxBxEGEDABAGACAD" # BSD ls
+		PS1="$(echo "${PS1}" | sed 's/00;/01;/g')"
+	fi
+
+	export LS_COLORS
+	export LSCOLORS
+fi
+unset PS1_COLOR
+unset DARK
+

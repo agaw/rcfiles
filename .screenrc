@@ -1,0 +1,12 @@
+startup_message off
+altscreen on
+defbce on
+shelltitle "$ |bash"
+term 'screen-s'
+
+# Display a line at the bottom with hostname, window titles & time
+caption always '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
+
+# Always send backspace as ^?, which is consistent with the bundled terminfo
+bindkey -k kb stuff ^?
+

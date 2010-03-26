@@ -1,0 +1,11 @@
+#! bash
+
+# Is run whenever we have a login interactive shell. Just prints a little
+# welcome message.
+
+echo "Welcome to $(uname)"'!'
+cookie="$(fortune 2> /dev/null)"
+[ -n "${cookie}" ] && echo "${cookie}" && echo
+
+ssource "${HOME}/.bash/login_local"
+

@@ -1,0 +1,61 @@
+\documentclass[a4paper,12pt]{report}
+
+% This file must be saved in the UTF8 encoding
+\usepackage[utf8]{inputenc}
+
+% These packages need to be included to insert pictures into your report
+\usepackage[pdftex]{graphicx}
+
+% Better maths suport
+\usepackage{amssymb,amsmath}
+
+% Support links in the pdf file
+\usepackage[pdfborder={0,0,0}]{hyperref}
+
+% Allow \url{}
+\usepackage{url}
+
+% Allow fancier citations, \citet \citep \citeauthor, etc
+% See details here: http://merkel.zoneo.net/Latex/natbib.php
+\usepackage[square,comma,sort,authoryear]{natbib}
+
+% Put a medium sized gap between paragraphs
+\setlength{\parskip}{\medskipamount}
+
+% Don't indent the start of new paragraphs
+\setlength{\parindent}{0pt}
+
+% Changes section numbering somehow...
+\renewcommand{\thesection}{\arabic{section}}
+
+% Bibliography style. Aside from plain, there is also apalike.
+% Look for *.bst files
+\bibliographystyle{plainnat}
+
+
+\title{___The Title goes here}
+\author{
+	___First Author\\
+	(email: \tt{___user@example.com}) \\
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+___Abstract goes here
+\end{abstract}
+
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+
+\section{___First Section}
+
+
+
+\bibliography{___something}
+
+\end{document}
+

@@ -1,0 +1,61 @@
+#! bash
+
+# Sets up the shell for interactive commands
+
+# Use the terminfo backspace character as the erase character. This is not
+# enabled by default because terminfo is often broken.
+#stty erase $(tput kbs)
+
+# The contents of /etc/debian_chroot will be printed in the prompt. You can
+# create this file in chroot environments to know where you are.
+if [ -z "$debian_chroot" -a -r /etc/debian_chroot ]; then
+	debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# Prompt: user@host:directory$
+PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\n\$ '
+
+# Check for unsupported TERM variable
+if ! tput init &> /dev/null; then
+	echo "Warning! TERM=$TERM unsupported, using TERM=xterm"
+	export TERM=xterm
+fi
+
+# The all important colours!
+ssource "${HOME}/.bash/colors"
+
+# xterm titlebar displays 'hostname:workingdir'
+if tput hs || tput tsl &> /dev/null; then
+	PROMPT_COMMAND='tput tsl; echo -n "$(hostname| cut -d. -f1):${PWD/$HOME/~}"; tput fsl;'
+fi
+
+# screen window displays current command
+case "${TERM}" in
+screen*)
+	PROMPT_COMMAND="$PROMPT_COMMAND echo -ne '\033k\033\\'"
+	;;
+esac
+
+# Useful aliases
+alias ls='ls --color=auto'
+alias ll='ls -hlF'
+alias la='ls -ha'
+alias  l='ls -halF'
+alias ld='ls -ld'
+alias f='find . -iname'
+alias webshare='python -c "import SimpleHTTPServer; SimpleHTTPServer.test()"'
+alias rm='rm -i'
+alias less='less -R'
+alias grep='grep --color=auto --exclude "*.svn-base"'
+
+# Bash should check the terminal size after every command terminates
+shopt -s checkwinsize
+# Don't attempt to tab-complete an empty line
+shopt -s no_empty_cmd_completion
+
+# Local customisations
+ssource "${HOME}/.bash/interactive_local"
+
+# Load bash completion if available
+ssource "/etc/bash_completion"
+

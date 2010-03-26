@@ -1,0 +1,34 @@
+If you don't want the bundled terminfo then don't symlink it into $HOME.
+
+Terminfo straight from Debian:
+ - screen*
+ - xterm (same as xterm-debian)
+ - xterm-color
+
+My modified terminfos:
+ - itermapp
+     based on xterm-debian but with a few fixes for iTerm.app
+ - xterm-simple
+	 a simpler profile with less advertised features. It's based on
+	 xterm-color, which is based on xterm-r6. It has ^? for backspace and ^[[3~
+	 for delete
+
+The following terminfo properties were added: hs, tsl, fsl, dsl. These are for
+the terminal status line, in this case the xterm titlebar.
+
+
+How should you use these?
+
+First, copy the .terminfo directory to every machine you log in to.
+
+If you're running xterm, urxvt, konsole or any other compliant terminal you
+should set TERM=xterm and ensure that backspace/delete send ^? and ^[[3~
+respectively. TERM must be set in your console preferences, NOT in bashrc, etc
+
+If you're running iTerm.app then set TERM to be itermapp. Do this by
+going to Bookmarks-> Manage Profiles-> Terminal Profiles-> Terminal Type
+
+If you have problems only on a specific machine, older OSes in particular, try
+using TERM=xterm-simple on that machine.
+Eg, cp ~/.terminfo/x/xterm-simple ~/.terminfo/x/xterm
+
