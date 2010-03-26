@@ -1,0 +1,17 @@
+This is a set of configuration files for a bunch of Unix apps I use regularly.
+
+The way I usually use this is as follows. Change the lines as appropriate for
+your system.
+
+Change into the cloned repositry and run setup.sh:
+    $ cd rc_files
+    $ bash setup.sh
+
+This will link all the configuration files into your home directory. It is therefore required
+to keep the cloned repositry.
+
+You're done now. You probably want to move your ssh keys (backed up to ~/backup) back into ~/.ssh
+
+Create files in ~/.bash called environment_local, interactive_local, etc to
+do this.
+
