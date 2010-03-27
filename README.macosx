@@ -1,0 +1,8 @@
+Mac OSX vim terminal page up, page down, home, end working
+
+in Terminal > File > Preferences
+change the following keyboard settings:
+Home: \033[4~
+End: \033[1~
+PageUp: \033[5~
+PageDown: \033[6~
