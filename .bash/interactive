@@ -24,18 +24,18 @@ fi
 # The all important colours!
 ssource "${HOME}/.bash/colors"
 
-# xterm titlebar displays 'hostname:workingdir'
-PROMPT_COMMAND='echo -ne "\033]0;$(hostname| cut -d. -f1):${PWD/$HOME/~}\007"'
-
 # screen window displays current command
 case "${TERM}" in
+xterm*|rxvt*)
+	PROMPT_COMMAND='echo -ne "\033]0;$(hostname| cut -d. -f1):${PWD/$HOME/~}\007"'
+	;;
 screen*)
-	PROMPT_COMMAND="$PROMPT_COMMAND echo -ne '\033k\033\\'"
+	PROMPT_COMMAND='echo -ne "\033k$(hostname| cut -d. -f1):${PWD/$HOME/~}\033\\"'
 	;;
 esac
 
 # Useful aliases
-alias ls='ls -G'
+alias ls='ls --color=auto'
 alias ll='ls -hlF'
 alias la='ls -ha'
 alias  l='ls -halF'
