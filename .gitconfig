@@ -1,8 +1,0 @@
-[push]
-	default = matching
-[branch "master"]
-	remote = origin
-	merge = refs/heads/master
-[user]
-	name = Andrew Naoum
-	email = andrew@naoum.net.au
