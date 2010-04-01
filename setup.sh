@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir -p ~/backup
-mv -f ~/.Xresources ~/.bash ~/.bash_logout ~/.bash_profile ~/.bashrc ~/.inputrc ~/.pythonrc.py ~/.screenrc ~/.ssh ~/.vim ~/.vimrc ~/backup
+mv -f ~/.Xresources ~/.bash ~/.bash_logout ~/.bash_profile ~/.bashrc ~/.inputrc ~/.pythonrc.py ~/.screenrc ~/.vim ~/.vimrc ~/backup
 
 for f in $(ls -A);
 do
