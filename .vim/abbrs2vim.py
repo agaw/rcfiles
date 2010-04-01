@@ -34,10 +34,10 @@ for abbrfile in os.listdir(abbrsdir):
 	abbr = "iab %s \x1b:set paste\ri%s\x1b:set nopaste\r" % (abbrfile.rsplit('.', 1)[0], abbr)
 	if abbr.find("___") >= 0:
 		# Then search for ___ to place the cursor there
-		abbr += "gg\r/___\x1b:nohlsearch\n"
+		abbr += "gg\r/___\x1b:nohlsearch\r\n"
 	else:
 		# Leave the cursor in insert mode
-		abbr += "a\n"
+		abbr += "a\r\n"
 	outfile.write(abbr)
 
 

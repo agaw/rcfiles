@@ -33,6 +33,8 @@ nmap <Esc>[Z <C-w>W
 " Q to reformat paragraph. I never use ex mode anyway (default binding for Q)
 nmap Q gwip
 
+" Delete does not overwrite the clipboard.
+map <Delete> "_x
 
 " I frequently type :Q or :WQ, etc instead of :q, :wq
 command! WQA :wqa
