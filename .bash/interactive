@@ -45,6 +45,7 @@ alias webshare='python -c "import SimpleHTTPServer; SimpleHTTPServer.test()"'
 alias rm='rm -i'
 alias less='less -R'
 alias grep='grep --color=auto --exclude "*.svn-base"'
+alias cd -='cd - > /dev/null'
 
 # Bash should check the terminal size after every command terminates
 shopt -s checkwinsize
