@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This is a comment
+
 mkdir -p ~/backup
 mv -f ~/.Xresources ~/.bash ~/.bash_logout ~/.bash_profile ~/.bashrc ~/.inputrc ~/.pythonrc.py ~/.screenrc ~/.vim ~/.vimrc ~/backup
 
